@@ -3,6 +3,7 @@
 #include <random>
 #include <cassert>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -26,7 +27,13 @@ int findMax(int ar[], int size) {
     return m;
 }
 
+// find middle value of an unsort array.
+int findMiddleValue(int ar[], int size) {
+    // return middle value of ar.
+    sort(ar, ar+size);
 
+    return size / 2;
+}
 
 void assignValues(int ar[], int size) {
     srand(1000);
@@ -61,7 +68,48 @@ void print(int ar[], int size) {
     }
 }
 
+int findMiddleValue2(int ar[], int size) {
+    int copyAr[size];
+    int c = 0;
+    for (int i=0; i<size; i++) {
+        // copyAr[i] = ar[i];
+        int v = ar[i];
 
+        if (c == 0) {
+            copyAr[c] = v;
+            c++;
+        }
+        else {
+            int j;
+            for (j=0; j<c; j++) {
+                if (copyAr[j] > v) {
+                    break;
+                }
+            }
+            int k;
+            for (k=c; k > j;  k--) {
+                copyAr[k] =copyAr[k-1];
+            }
+//            int k = c;
+//            while (k >= j) {
+//                copyAr[k+1] = copyAr[k];
+//                k--;
+//            }
+
+            copyAr[k] = v;
+            c++;
+        }
+        // 38
+        // 221
+        // 304
+        // 509
+        // 849
+        //
+
+
+    }
+
+}
 
 int main() {
 
@@ -127,5 +175,11 @@ int main() {
     cout << "Average: " << average(myList, 10) << endl;
     double avg = average(myList,10);
     assert(fabs(avg - 463.4) < 0.000001);
+
+    int m = findMiddleValue2(myList, 10);
+    cout << m << endl;
+    cout << myList[m] << endl;
+    print(myList, 10);
     return 0;
+
 }
