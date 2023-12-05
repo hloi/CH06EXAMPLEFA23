@@ -106,9 +106,14 @@ int findMiddleValue2(int ar[], int size) {
         // 849
         //
 
-
     }
 
+    // copy new sort array to old array
+    for (int i=0; i<size; i++) {
+        ar[i] = copyAr[i];
+    }
+
+    return size/2;
 }
 
 int main() {
